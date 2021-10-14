@@ -1,8 +1,7 @@
 # tp2_caouettew#
-
-    TP2 présenter dans le cadre du cours de developpement web
-    Les critères sont les suivants :  
-
+    ```
+    TP2 présenter dans le cadre du cours de developpement web  Les critères sont les suivants :  
+    ```
     *l'application doit comprendre une liste présentant une collection complète présentant seulement les informations pricipales ( titres/images)  
     *il doit être possible d'afficher le detail d'un item de la liste sur le click (4/5 informations pertinentes)  
     *il doit être possible d'ajouter un élément à la liste  
