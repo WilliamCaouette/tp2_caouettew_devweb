@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <left-nav-bar :lists="lists"></left-nav-bar>
+    
   </div>
 </template>
 
@@ -12,6 +13,7 @@ export default {
   components: {
     LeftNavBar
   },
+  props:["lists"],
   data(){ 
     return {
       lists : [
