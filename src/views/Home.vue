@@ -7,7 +7,7 @@
           <p>{{list.description}}</p>
           <button @click="deleteList(list)">delete</button>
           <ul>
-            <li v-for="element in list.elements" :key="element.id">
+            <li v-for="element in list.elements" :class="element.isCompleted ? 'complete' :  ''" :key="element.id">
               <input v-if="element.isCompleted" checked type="checkbox" name="isCompleted" >
               <input v-else type="checkbox" name="isCompleted" >
               {{element.title}}
@@ -17,7 +17,15 @@
     </div>
   </div>
 </template>
-
+<style scoped>
+  li{
+    list-style: none;
+  }
+  .complete{
+    text-decoration: line-through;
+    color: rgb(128, 123, 123);
+  }
+</style>
 <script>
 import LeftNavBar from '../components/LeftNavBar.vue'
 
@@ -28,7 +36,7 @@ export default {
   },
   methods:{
     deleteList(list){
-      list.deletionDate = this.currentTime;
+      list.deletionDate = this.currentDate;
     }
   },
   computed:{
@@ -37,13 +45,14 @@ export default {
         return list.deletionDate == null;
       });
     },
-    currentTime(){
+    currentDate(){
       let now = new Date();
       return now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate();
     },
   },
   data(){ 
     return {
+      filter : null,
       lists : [
         {
           id:0,
@@ -54,7 +63,7 @@ export default {
             {
               id:0,
               title: "livre 1",
-              isCompleted: false
+              isCompleted: true
             },
             {
               id:1,
