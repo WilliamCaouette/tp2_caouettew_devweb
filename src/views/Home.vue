@@ -2,8 +2,18 @@
   <div class="home">
     <left-nav-bar :lists="lists"></left-nav-bar>
     <div class="list-lists">
-      <button> + Ajouter une Liste</button>
-
+      <button  @click="toggleForm"> + Ajouter une Liste</button>
+      <div :class="isFormShow ? 'show' :  'hidden'">
+        <div>
+          <label for="Name">Nom :</label>
+          <input type="text" name="nom" id="name">
+        </div>
+        <div >
+          <label for="description">Description :</label>
+          <textarea style="resize:none" maxlength="35" name="description" id="description" cols="30" rows="10"></textarea>
+        </div>
+        <button @click="addList">Ajouter</button>
+      </div>
       <div v-for="list in nonDeletedLists" :key="list.id" class="list">
         <h3>{{list.name}}</h3>
         <p>{{list.description}}</p>
@@ -34,6 +44,9 @@
   .complete{
     text-decoration: line-through;
     color: rgb(128, 123, 123);
+  }
+  .hidden{
+    display: none;
   }
 </style>
 <script>
@@ -72,6 +85,26 @@ export default {
       );
       e.target.value = "";
       this.saveDatasInLocalStorage();
+    },
+    toggleForm(){
+      this.isFormShow = !this.isFormShow;
+      document.querySelector("#name").value = "";
+      document.querySelector("#description").value = "";
+
+    },
+    addList(){
+      this.lists.push(
+        {
+          id: this.lists.length,
+          name : document.querySelector("#name").value,
+          description : document.querySelector("#description").value,
+          deletionDate : null,
+          elements : []
+        } 
+      )
+      this.saveDatasInLocalStorage();
+      this.toggleForm();
+
     }
   },
   computed:{
@@ -88,6 +121,7 @@ export default {
   data(){ 
     return {
       filter : null,
+      isFormShow : false,
       lists : [
         {
           id:0,

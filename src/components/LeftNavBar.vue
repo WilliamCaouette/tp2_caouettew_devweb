@@ -6,7 +6,7 @@
         </section>
         <section class="middle">
             <h2>Mes Listes</h2>
-            <h3 class="list-name" @click="changeListShow(list)" v-for="list in lists" :key="list.id">{{list.name}}</h3>
+            <h3 class="list-name" @click="changeListShow(list)" v-for="list in nonDeletedLists" :key="list.id" >{{list.name}}</h3>
         </section>
         <section>
             <h2>Autres</h2>
@@ -25,6 +25,13 @@ export default {
      changeListShow(list){
          return;
      }
+ },
+ computed:{
+      nonDeletedLists(){
+      return this.lists.filter((list)=>{
+        return list.deletionDate == null;
+      });
+    }
  }
 
 }
