@@ -12,7 +12,6 @@
             <h2>Autres</h2>
             <div id="nav"></div>
             <router-link to="/trashcan">Corbeille</router-link>
-            <router-link to="/settings">Réglages</router-link>
         <router-view/>
         </section>
   </div>

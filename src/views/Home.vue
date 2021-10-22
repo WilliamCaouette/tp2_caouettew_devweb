@@ -64,7 +64,7 @@ export default {
   },
   methods:{
     saveDatasInLocalStorage(){
-      let stringnifyLists = JSON.stringify(this.nonDeletedLists);
+      let stringnifyLists = JSON.stringify(this.lists);
       localStorage.setItem("savedList", stringnifyLists);
     },
     deleteList(list){
@@ -76,7 +76,8 @@ export default {
       this.saveDatasInLocalStorage();
     },
     addElementToList(e){
-      this.lists[e.target.dataset.pos].elements.push(
+      if(e.target.value != ""){
+        this.lists[e.target.dataset.pos].elements.push(
         {
           id: this.lists[e.target.dataset.pos].elements.length,
           title: e.target.value,
@@ -85,6 +86,7 @@ export default {
       );
       e.target.value = "";
       this.saveDatasInLocalStorage();
+      }
     },
     toggleForm(){
       this.isFormShow = !this.isFormShow;
