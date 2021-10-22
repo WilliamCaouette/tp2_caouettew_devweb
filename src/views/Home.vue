@@ -2,25 +2,27 @@
   <div class="home">
     <left-nav-bar :lists="lists"></left-nav-bar>
     <div class="list-lists">
-        <div v-for="list in nonDeletedLists" :key="list.id" class="list">
-          <h3>{{list.name}}</h3>
-          <p>{{list.description}}</p>
-          <input 
-            type="text" name="element" :data-pos="list.id" placeholder="Ajouter un élément à votre liste"
-            @keypress.enter="addElementToList"
+      <button> + Ajouter une Liste</button>
+
+      <div v-for="list in nonDeletedLists" :key="list.id" class="list">
+        <h3>{{list.name}}</h3>
+        <p>{{list.description}}</p>
+        <input 
+          type="text" name="element" :data-pos="list.id" placeholder="Ajouter un élément à votre liste"
+          @keypress.enter="addElementToList"
+        >
+        <button @click="deleteList(list)">delete</button>
+        <ul>
+          <li
+            v-for="element in list.elements" @click="changeElementStatus(element)"
+            :class="element.isCompleted ? 'complete' :  ''" :key="element.id"
           >
-          <button @click="deleteList(list)">delete</button>
-          <ul>
-            <li
-             v-for="element in list.elements" @click="changeElementStatus(element)"
-             :class="element.isCompleted ? 'complete' :  ''" :key="element.id"
-             >
-              <input v-if="element.isCompleted" checked type="checkbox" name="isCompleted" >
-              <input v-else type="checkbox" name="isCompleted" >
-              {{element.title}}
-            </li>
-          </ul>
-        </div>
+            <input v-if="element.isCompleted" checked type="checkbox" name="isCompleted" >
+            <input v-else type="checkbox" name="isCompleted" >
+            {{element.title}}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -42,22 +44,34 @@ export default {
   components: {
     LeftNavBar
   },
+  beforeMount(){
+    if(localStorage.getItem("savedList")){
+      this.lists = JSON.parse(localStorage.getItem("savedList"));
+    }
+  },
   methods:{
+    saveDatasInLocalStorage(){
+      let stringnifyLists = JSON.stringify(this.nonDeletedLists);
+      localStorage.setItem("savedList", stringnifyLists);
+    },
     deleteList(list){
       list.deletionDate = this.currentDate;
+      this.saveDatasInLocalStorage();
     },
     changeElementStatus(element){
       element.isCompleted = !element.isCompleted;
+      this.saveDatasInLocalStorage();
     },
     addElementToList(e){
-      console.log(e.target.value)
       this.lists[e.target.dataset.pos].elements.push(
         {
           id: this.lists[e.target.dataset.pos].elements.length,
           title: e.target.value,
           isCompleted:false
-        });
-        e.target.value = "";
+        }
+      );
+      e.target.value = "";
+      this.saveDatasInLocalStorage();
     }
   },
   computed:{
