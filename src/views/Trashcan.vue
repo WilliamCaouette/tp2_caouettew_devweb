@@ -13,8 +13,15 @@
         </div>
     </div>
 </template>
-<style scoped>
-
+<style>
+  li{
+    list-style: none;
+    cursor: pointer;
+  }
+  .complete{
+    text-decoration: line-through;
+    color: rgb(128, 123, 123);
+  }
 </style>
 <script>
 import LeftNavBar from '../components/LeftNavBar.vue'

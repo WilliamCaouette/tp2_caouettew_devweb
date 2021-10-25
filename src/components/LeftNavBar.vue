@@ -1,15 +1,15 @@
 <template>
   <div class="nav-bar">
         <section class="top">
-            <h1>MyLists</h1>
-            <input type="text" placeholder="search" @input="search()" name="search" id="search">
+            <router-link to="/"><h1>MyLists</h1></router-link>
+            <input @input="applyFilter" type="text" placeholder="search" name="search" id="search">
         </section>
         <section class="middle">
             <h2>Mes Listes</h2>
             <h3 class="list-name" @click="changeListShow(list)" v-for="list in nonDeletedLists" :key="list.id" >{{list.name}}</h3>
         </section>
         <section>
-            <h2>Autres</h2>
+            <h2>Utilitaires</h2>
             <div id="nav"></div>
             <router-link to="/trashcan">Corbeille</router-link>
         <router-view/>
@@ -20,9 +20,13 @@
 <script>
 export default {
  props:["lists"],
+ emits:["applyFilter"],
  methods:{
      changeListShow(list){
-         return;
+         document.querySelector("#search").value = list.name;
+     },
+     applyFilter(e){
+         this.$emit("applyFilter", e.target.value)
      }
  },
  computed:{

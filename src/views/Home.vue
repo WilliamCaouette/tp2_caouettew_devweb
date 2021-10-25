@@ -1,42 +1,22 @@
 <template>
   <div class="home">
-    <left-nav-bar :lists="lists"></left-nav-bar>
+    <left-nav-bar @applyFilter="changeFilter" :lists="lists"></left-nav-bar>
     <div class="list-lists">
-      <button  @click="toggleForm"> + Ajouter une Liste</button>
-      <div :class="isFormShow ? 'show' :  'hidden'">
-        <div>
-          <label for="Name">Nom :</label>
-          <input type="text" name="nom" id="name">
+      <add-list-form @addList="addList"></add-list-form>
+      <div v-if="filter == null || filter == ''">
+        <div v-for="list in nonDeletedLists" :key="list.id" class="list">
+          <list :list="list" @addElement="addElementToList" @removeList="deleteList" @changeElementStatus="saveDatasInLocalStorage"></list>
         </div>
-        <div >
-          <label for="description">Description :</label>
-          <textarea style="resize:none" maxlength="35" name="description" id="description" cols="30" rows="10"></textarea>
-        </div>
-        <button @click="addList">Ajouter</button>
       </div>
-      <div v-for="list in nonDeletedLists" :key="list.id" class="list">
-        <h3>{{list.name}}</h3>
-        <p>{{list.description}}</p>
-        <input 
-          type="text" name="element" :data-pos="list.id" placeholder="Ajouter un élément à votre liste"
-          @keypress.enter="addElementToList"
-        >
-        <button @click="deleteList(list)">delete</button>
-        <ul>
-          <li
-            v-for="element in list.elements" @click="changeElementStatus(element)"
-            :class="element.isCompleted ? 'complete' :  ''" :key="element.id"
-          >
-            <input v-if="element.isCompleted" checked type="checkbox" name="isCompleted" >
-            <input v-else type="checkbox" name="isCompleted" >
-            {{element.title}}
-          </li>
-        </ul>
+      <div v-else>
+        <div v-for="list in filteredList" :key="list.id" class="list">
+          <list-detail  :list="list" @addElement="addElementToList" @removeList="deleteList" @changeElementStatus="saveDatasInLocalStorage" ></list-detail>
+        </div>
       </div>
     </div>
   </div>
 </template>
-<style scoped>
+<style>
   li{
     list-style: none;
     cursor: pointer;
@@ -45,34 +25,40 @@
     text-decoration: line-through;
     color: rgb(128, 123, 123);
   }
-  .hidden{
-    display: none;
-  }
 </style>
 <script>
+import AddListForm from '../components/AddListForm.vue';
 import LeftNavBar from '../components/LeftNavBar.vue'
+import List from '../components/List.vue';
+import ListDetail from '../components/ListDetail.vue';
 
 export default {
   name: 'Home',
   components: {
-    LeftNavBar
+    LeftNavBar,
+    AddListForm,
+    List,
+    ListDetail
   },
   beforeMount(){
     if(localStorage.getItem("savedList")){
       this.lists = JSON.parse(localStorage.getItem("savedList"));
     }
+    else{
+      this.saveDatasInLocalStorage();
+    }
   },
   methods:{
+    changeFilter(value){
+      this.filter = value;
+      console.log(this.filteredList[0]);
+    },
     saveDatasInLocalStorage(){
       let stringnifyLists = JSON.stringify(this.lists);
       localStorage.setItem("savedList", stringnifyLists);
     },
-    deleteList(list){
-      list.deletionDate = this.currentDate;
-      this.saveDatasInLocalStorage();
-    },
-    changeElementStatus(element){
-      element.isCompleted = !element.isCompleted;
+    deleteList(e){
+      this.lists[e.target.dataset.pos].deletionDate = this.currentDate;
       this.saveDatasInLocalStorage();
     },
     addElementToList(e){
@@ -88,25 +74,18 @@ export default {
       this.saveDatasInLocalStorage();
       }
     },
-    toggleForm(){
-      this.isFormShow = !this.isFormShow;
-      document.querySelector("#name").value = "";
-      document.querySelector("#description").value = "";
-
-    },
-    addList(){
+    addList(e){
       this.lists.push(
         {
           id: this.lists.length,
           name : document.querySelector("#name").value,
           description : document.querySelector("#description").value,
+          creationDate : this.currentDate,
           deletionDate : null,
           elements : []
         } 
       )
       this.saveDatasInLocalStorage();
-      this.toggleForm();
-
     }
   },
   computed:{
@@ -119,17 +98,22 @@ export default {
       let now = new Date();
       return now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate();
     },
+    filteredList(){
+      return this.lists.filter((list)=>{
+        return list.name.includes(this.filter);
+      }); 
+    }
   },
   data(){ 
     return {
       filter : null,
-      isFormShow : false,
       lists : [
         {
           id:0,
           name: "lire",
           description : "exemple d'utilisation de l'application",
           deletionDate : null,
+          creationDate : "2021-10-25",
           elements:[
             {
               id:0,
@@ -153,6 +137,7 @@ export default {
           name: "tâches",
           description : "exemple d'utilisation de l'application",
           deletionDate : null,
+          creationDate : "2021-10-25",
           elements:[
             {
               id:0,
@@ -175,6 +160,7 @@ export default {
           name: "épicerie",
           description : "exemple d'utilisation de l'application",
           deletionDate : null,
+          creationDate : "2021-10-25",
           elements:[
             {
               id:0,
