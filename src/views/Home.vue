@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <left-nav-bar @applyFilter="changeFilter" :lists="lists"></left-nav-bar>
+    <div class="left-bar">
+      <left-nav-bar @applyFilter="changeFilter" :lists="lists"></left-nav-bar>
+    </div>
     <div class="list-lists">
       <add-list-form @addList="addList"></add-list-form>
       <div v-if="filter == null || filter == ''">
@@ -17,13 +19,41 @@
   </div>
 </template>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap');
+  *{
+    font-family: 'Roboto', sans-serif;
+  }
+  h1{
+    font-family: 'Pacifico', cursive;
+    text-decoration: none;
+    color: black;
+  }
+  router-link{
+    text-decoration: none;
+  }
   li{
-    list-style: none;
-    cursor: pointer;
+      list-style: none;
+      cursor: pointer;
   }
   .complete{
-    text-decoration: line-through;
-    color: rgb(128, 123, 123);
+      text-decoration: line-through;
+      color: rgb(128, 123, 123);
+  }
+  .home{
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow-y: scroll;
+      display: flex;
+
+  }
+  .left-bar{
+      flex-basis: 30%;
+      display: flex;
+      align-items: flex-start;
+      padding: 3%;
+
   }
 </style>
 <script>

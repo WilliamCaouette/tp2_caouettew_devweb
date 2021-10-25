@@ -3,6 +3,10 @@
 </template>
 
 <style>
+body{
+  margin: 0;
+  padding: 0;
+}
 #app #home {
   width: 100%;
   height: 100%;

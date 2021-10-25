@@ -8,7 +8,7 @@
             <h2>Mes Listes</h2>
             <h3 class="list-name" @click="changeListShow(list)" v-for="list in nonDeletedLists" :key="list.id" >{{list.name}}</h3>
         </section>
-        <section>
+        <section class="bottom">
             <h2>Utilitaires</h2>
             <div id="nav"></div>
             <router-link to="/trashcan">Corbeille</router-link>
@@ -46,9 +46,15 @@ export default {
         width: 30%;
         display: flex;
         flex-direction: column;
-        align-items: center;
+
     }
     .top{
         margin-top: 5%;
+    }
+    .middle{
+        margin-top:15vh;
+    }
+    .bottom{
+        margin-top:15vh;
     }
 </style>
