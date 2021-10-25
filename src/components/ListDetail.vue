@@ -5,13 +5,13 @@ list d'éléments
     <h3>{{list.name}}</h3>
     <p>{{list.description}}</p>
     <p>créé le : {{list.creationDate}}</p>
-    <p v-if="list.deletionsDate != null">statut : supprimé le {{list.deletionDate}}</p>
+    <p v-if="list.deletionDate != null">statut : supprimé le {{list.deletionDate}}</p>
     <p v-else>statut : En cours depuis {{list.creationDate}}</p>
     <input 
       type="text" name="element" :data-pos="list.id" placeholder="Ajouter un élément à votre liste"
       @keypress.enter="addElementToList"
     >
-    <button v-if="list.deletionsDate != null" :data-pos="list.id" @click="restoreList(list)">Récupérer la list</button>
+    <button v-if="list.deletionDate != null" :data-pos="list.id" @click="restoreList(list)">Récupérer la list</button>
     <button v-else :data-pos="list.id" @click="deleteList">Supprimer</button>
     <ul>
       <li
@@ -29,7 +29,7 @@ list d'éléments
 <script>
 export default {
     props:["list"],
-    emits:["addElement", "removeList", "changeElementStatus"],
+    emits:["addElement", "removeList", "changeElementStatus", "restoreList"],
     methods:{
       addElementToList(e){
         this.$emit("addElement", e);
@@ -39,12 +39,12 @@ export default {
       },
       restoreList(list){
           list.deletionDate = null;
-          this.saveDatasInLocalStorage();
+          this.$emit("restoreList");
       },
       changeElementStatus(element){
         element.isCompleted = !element.isCompleted;
         this.$emit("changeElementStatus");
-      },
+      }
     }
 }
 </script>

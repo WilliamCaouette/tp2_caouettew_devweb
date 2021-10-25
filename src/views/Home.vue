@@ -10,7 +10,7 @@
       </div>
       <div v-else>
         <div v-for="list in filteredList" :key="list.id" class="list">
-          <list-detail  :list="list" @addElement="addElementToList" @removeList="deleteList" @changeElementStatus="saveDatasInLocalStorage" ></list-detail>
+          <list-detail  :list="list" @addElement="addElementToList" @removeList="deleteList" @changeElementStatus="saveDatasInLocalStorage" @restoreList="saveDatasInLocalStorage" ></list-detail>
         </div>
       </div>
     </div>
@@ -51,7 +51,6 @@ export default {
   methods:{
     changeFilter(value){
       this.filter = value;
-      console.log(this.filteredList[0]);
     },
     saveDatasInLocalStorage(){
       let stringnifyLists = JSON.stringify(this.lists);

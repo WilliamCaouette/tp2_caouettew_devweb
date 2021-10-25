@@ -48,9 +48,9 @@ export default {
           this.saveDatasInLocalStorage();
       },
       saveDatasInLocalStorage(){
-      let stringnifyLists = JSON.stringify(this.lists);
-      localStorage.setItem("savedList", stringnifyLists);
-    }
+        let stringnifyLists = JSON.stringify(this.lists);
+       localStorage.setItem("savedList", stringnifyLists);
+     }
   },
   computed:{
     deletedLists(){
