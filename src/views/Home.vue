@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="left-bar">
-      <left-nav-bar @applyFilter="changeFilter" :lists="lists"></left-nav-bar>
+      <left-nav-bar @applyFilter="changeFilter" :filter="filter" :lists="lists"></left-nav-bar>
     </div>
     <div class="list-lists">
       <add-list-form @addList="addList"></add-list-form>
@@ -11,6 +11,7 @@
         </div>
       </div>
       <div v-else>
+        <button class="btn-supprimer" @click="changeFilter('')">Retirer le Filtre</button>
         <div v-for="list in filteredList" :key="list.id" class="list">
           <list-detail  :list="list" @addElement="addElementToList" @removeList="deleteList" @changeElementStatus="saveDatasInLocalStorage" @restoreList="saveDatasInLocalStorage" ></list-detail>
         </div>
@@ -20,41 +21,7 @@
 </template>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap');
-  *{
-    font-family: 'Roboto', sans-serif;
-  }
-  h1{
-    font-family: 'Pacifico', cursive;
-    text-decoration: none;
-    color: black;
-  }
-  router-link{
-    text-decoration: none;
-  }
-  li{
-      list-style: none;
-      cursor: pointer;
-  }
-  .complete{
-      text-decoration: line-through;
-      color: rgb(128, 123, 123);
-  }
-  .home{
-      margin: 0;
-      padding: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow-y: scroll;
-      display: flex;
 
-  }
-  .left-bar{
-      flex-basis: 30%;
-      display: flex;
-      align-items: flex-start;
-      padding: 3%;
-
-  }
 </style>
 <script>
 import AddListForm from '../components/AddListForm.vue';
@@ -135,7 +102,7 @@ export default {
   },
   data(){ 
     return {
-      filter : null,
+      filter : "",
       lists : [
         {
           id:0,

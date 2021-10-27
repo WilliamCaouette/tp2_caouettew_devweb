@@ -1,16 +1,16 @@
 <template>
-  <button  @click="toggleForm"> + Ajouter une Liste</button>
-      <div :class="isFormShow ? 'show' :  'hidden'">
-        <div>
-          <label for="Name">Nom :</label>
-          <input type="text" name="nom" id="name">
-        </div>
-        <div >
-          <label for="description">Description :</label>
-          <textarea style="resize:none" maxlength="35" name="description" id="description" cols="30" rows="10"></textarea>
-        </div>
-        <button @click="addList">Ajouter</button>
-      </div>
+  <button class="btn-add"  @click="toggleForm"> + Ajouter une Liste</button>
+  <div :class="isFormShow ? 'show' :  'hidden'">
+    <div>
+      <label for="Name">Nom :</label>
+      <input type="text" name="nom" id="name">
+    </div>
+    <div >
+      <label for="description">Description :</label>
+      <textarea style="resize:none" maxlength="35" name="description" id="description" cols="30" rows="10"></textarea>
+    </div>
+    <button @click="addList">Ajouter</button>
+  </div>
 </template>
 
 <script>

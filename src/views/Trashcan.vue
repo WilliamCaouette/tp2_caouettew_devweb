@@ -1,16 +1,20 @@
 <template>
     <div class="trashcan">
+      <div class="left-bar">
         <left-nav-bar :lists="lists"></left-nav-bar>
+      </div>
+      <div class="list-lists">
         <h2>Corbeille</h2>
-        <button @click="deleteHiddenLists">Vider la Corbeille</button>
+        <button class="btn-supprimer" @click="deleteHiddenLists">Vider la Corbeille</button>
         <div v-for="list in deletedLists" :key="list.id">
             <h3>{{list.name}}</h3>
+            <button class="btn-restore-list" @click="restoreList(list)">Récupérer la list</button>
             <p>{{list.description}}</p>
-            <button @click="restoreList(list)">Récupérer la list</button>
             <ul>
                 <li v-for="element in list.elements" :key="element.id">{{element.title}}</li>
             </ul>
         </div>
+      </div>
     </div>
 </template>
 <style>
@@ -22,6 +26,11 @@
     text-decoration: line-through;
     color: rgb(128, 123, 123);
   }
+  h2{
+    font-size: 3em;
+    color: #42b983;
+  }
+  
 </style>
 <script>
 import LeftNavBar from '../components/LeftNavBar.vue'

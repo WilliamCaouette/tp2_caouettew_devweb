@@ -3,16 +3,18 @@ list d'éléments
 <template>
   <div>
     <h3>{{list.name}}</h3>
-    <p>{{list.description}}</p>
+    <p> description: {{list.description}}</p>
     <p>créé le : {{list.creationDate}}</p>
     <p v-if="list.deletionDate != null">statut : supprimé le {{list.deletionDate}}</p>
     <p v-else>statut : En cours depuis {{list.creationDate}}</p>
-    <input 
-      type="text" name="element" :data-pos="list.id" placeholder="Ajouter un élément à votre liste"
-      @keypress.enter="addElementToList"
-    >
-    <button v-if="list.deletionDate != null" :data-pos="list.id" @click="restoreList(list)">Récupérer la list</button>
-    <button v-else :data-pos="list.id" @click="deleteList">Supprimer</button>
+    <div  class="list-control">
+        <input 
+        type="text" name="element" :data-pos="list.id" placeholder="Ajouter un élément à votre liste"
+        @keypress.enter="addElementToList"
+        >
+        <button class="btn-restore-list" v-if="list.deletionDate != null" :data-pos="list.id" @click="restoreList(list)">Récupérer la list</button>
+        <button v-else :data-pos="list.id" @click="deleteList">Supprimer</button>
+    </div>
     <ul>
       <li
         v-for="element in list.elements" @click="changeElementStatus(element)"
@@ -50,5 +52,23 @@ export default {
 </script>
 
 <style>
-
+  h3{
+    font-size: 2em;
+    color: #42b983;
+  }
+  ul{
+    padding: 0;
+  }
+  li{
+    color: #fff;
+    list-style: none;
+    cursor: pointer;
+  }
+  .complete{
+      text-decoration: line-through;
+      color: rgb(128, 123, 123);
+  }
+  p{
+      color: #fff;
+  }
 </style>

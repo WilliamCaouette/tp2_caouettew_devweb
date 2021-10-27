@@ -3,11 +3,14 @@ list d'éléments
 <template>
   <div>
     <h3>{{list.name}}</h3>
-    <input 
-      type="text" name="element" :data-pos="list.id" placeholder="Ajouter un élément à votre liste"
-      @keypress.enter="addElementToList"
-    >
-    <button :data-pos="list.id" @click="deleteList">Supprimer</button>
+    <div  class="list-control">
+      <input
+        type="text" name="element" :data-pos="list.id" placeholder="Ajouter un élément à votre liste"
+        @keypress.enter="addElementToList"
+      >
+      <button :data-pos="list.id" @click="deleteList">Supprimer</button>
+    </div>
+    
     <ul>
       <li
         v-for="element in list.elements" @click="changeElementStatus(element)"
@@ -40,6 +43,21 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  h3{
+    font-size: 2em;
+    color: #42b983;
+  }
+  ul{
+    padding: 0;
+  }
+  li{
+    color: #fff;
+    list-style: none;
+    cursor: pointer;
+  }
+  .complete{
+      text-decoration: line-through;
+      color: rgb(128, 123, 123);
+  }
 </style>
