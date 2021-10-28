@@ -1,3 +1,5 @@
+formulaire et le bouton de "toggle" qui l'accompagne permettant d'ajouter une liste à la liste principale
+
 <template>
   <button class="btn-add"  @click="toggleForm"> + Ajouter une Liste</button>
   <div class="form" :class="isFormShow ? 'show' :  'hidden'">

@@ -1,4 +1,5 @@
-list d'éléments
+list d'éléments qui s'affiche au moment d'ajouter un filtre elle présente à la fois les éléments supprimer comme les éléments
+en cours. Gère l'ajout d'éléments et la modification de statut d'éléments et la suppression de la liste ainsi que la récupération de la liste
 
 <template>
   <div>

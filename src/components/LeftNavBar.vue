@@ -1,3 +1,4 @@
+Barre de navigation sur le coté de l'Application gère en bonne partie les filtres et les liens
 <template>
   <div class="nav-bar">
         <section class="top">
@@ -56,7 +57,7 @@ export default {
         margin-top:15vh;
     }
     .bottom{
-        margin-top:15vh;
+        margin-top:5vh;
     }
     h3, #corbeille{
         color: rgb(98, 138, 119);

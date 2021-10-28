@@ -1,5 +1,6 @@
-list d'éléments
-
+list d'éléments tel que présenter sur la page d'accueil (N'INCLUE PAS LA PAGE CORBEILLE, parceque manque de temps)
+gère les changement de statut des éléments et la suppression de la liste en elle même
+pourrait être dissocier des éléments qui pourrait être un componnent à part entière
 <template>
   <div>
     <h3><img :src="list.img" :alt="list.description"> {{list.name}}</h3>
