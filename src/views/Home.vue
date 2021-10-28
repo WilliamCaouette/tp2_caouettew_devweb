@@ -70,7 +70,7 @@ export default {
       this.saveDatasInLocalStorage();
       }
     },
-    addList(e){
+    addList(theme){
       this.lists.push(
         {
           id: this.lists.length,
@@ -78,11 +78,12 @@ export default {
           description : document.querySelector("#description").value,
           creationDate : this.currentDate,
           deletionDate : null,
+          img: `img/${theme}.png`,
           elements : []
         } 
       )
       this.saveDatasInLocalStorage();
-    }
+    },
   },
   computed:{
     nonDeletedLists(){
@@ -98,7 +99,7 @@ export default {
       return this.lists.filter((list)=>{
         return list.name.includes(this.filter);
       }); 
-    }
+    },
   },
   data(){ 
     return {
@@ -110,6 +111,7 @@ export default {
           description : "exemple d'utilisation de l'application",
           deletionDate : null,
           creationDate : "2021-10-25",
+          img: "img/homework.png",
           elements:[
             {
               id:0,
@@ -134,6 +136,7 @@ export default {
           description : "exemple d'utilisation de l'application",
           deletionDate : null,
           creationDate : "2021-10-25",
+          img: "img/task.png",
           elements:[
             {
               id:0,
@@ -157,6 +160,7 @@ export default {
           description : "exemple d'utilisation de l'application",
           deletionDate : null,
           creationDate : "2021-10-25",
+          img: "img/purchase.png",
           elements:[
             {
               id:0,

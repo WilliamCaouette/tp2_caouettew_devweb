@@ -83,14 +83,21 @@
     background-color: #42b983;
     padding: 1% 2%;
     border: #42b983 1px solid;
-    border-radius: 3px;
     color: #fff;
+    border-radius: 3px;
     margin-left: 85%;
-    transition: 500ms ease all;
     cursor: pointer;
+    transition: 500ms ease all;
   }
   .btn-restore-list:hover{
-    color: #42b983;
     background-color: #fff;
+    color: #42b983;
+  }
+  .restore-list{
+    background-color: #42b983;
+    padding: 1% 2%;
+    border: #42b983 1px solid;
+    color: #fff;
+    border-radius: 3px;
   }
 </style>

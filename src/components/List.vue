@@ -2,7 +2,7 @@ list d'éléments
 
 <template>
   <div>
-    <h3>{{list.name}}</h3>
+    <h3><img :src="list.img" :alt="list.description"> {{list.name}}</h3>
     <div  class="list-control">
       <input
         type="text" name="element" :data-pos="list.id" placeholder="Ajouter un élément à votre liste"
@@ -59,5 +59,8 @@ export default {
   .complete{
       text-decoration: line-through;
       color: rgb(128, 123, 123);
+  }
+  img{
+    width: 30px;
   }
 </style>

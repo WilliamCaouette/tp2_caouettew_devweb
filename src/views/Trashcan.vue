@@ -30,7 +30,6 @@
     font-size: 3em;
     color: #42b983;
   }
-  
 </style>
 <script>
 import LeftNavBar from '../components/LeftNavBar.vue'

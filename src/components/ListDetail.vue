@@ -12,7 +12,7 @@ list d'éléments
         type="text" name="element" :data-pos="list.id" placeholder="Ajouter un élément à votre liste"
         @keypress.enter="addElementToList"
         >
-        <button class="btn-restore-list" v-if="list.deletionDate != null" :data-pos="list.id" @click="restoreList(list)">Récupérer la list</button>
+        <button  v-if="list.deletionDate != null" :data-pos="list.id" @click="restoreList(list)">Récupérer la list</button>
         <button v-else :data-pos="list.id" @click="deleteList">Supprimer</button>
     </div>
     <ul>
