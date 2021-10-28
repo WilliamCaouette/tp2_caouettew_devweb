@@ -62,15 +62,30 @@ formulaire et le bouton de "toggle" qui l'accompagne permettant d'ajouter une li
 export default {
     emits:["addList"],
     methods:{
+
+    /**
+     * @author William Caouette
+     * @description lance l'évènement pour ajouter une liste
+     */
         addList(){
             this.$emit("addList", this.theme);
             this.toggleForm();
         },
+
+    /**
+     * @author William Caouette
+     * @description permet d'ouvrire et de fermer le formulaire (vide aussi les informations dans les champs)
+     */
         toggleForm(){
             this.isFormShow = !this.isFormShow;
             document.querySelector("#name").value = "";
             document.querySelector("#description").value = "";
         },
+
+      /**
+     * @author William Caouette
+     * @description Change la valeur du theme choisie
+     */
         changeTheme(theme){
           this.theme = theme
         }

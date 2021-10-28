@@ -23,15 +23,30 @@ export default {
  props:["lists", "filter"],
  emits:["applyFilter"],
  methods:{
+
+     /**
+     * @author William Caouette
+     * @description lance l'évènement pour appliquer un filtre quand l'utilisateur appuis sur le nom d'une liste pour voire son détail
+     */
      changeListShow(list){
          document.querySelector("#search").value = list.name;
          this.$emit("applyFilter", document.querySelector("#search").value)
      },
+
+     /**
+     * @author William Caouette
+     * @description Applique le filtre en fonction de ce qui est entrée dans le champ
+     */
      applyFilter(e){
          this.$emit("applyFilter", e.target.value)
      }
  },
  computed:{
+     /**
+     * @author William Caouette
+     * @description Filtre les listes pour obtenire celle qui ne sont pas supprimés
+     * @returns liste des listes non-supprimés
+     */
       nonDeletedLists(){
       return this.lists.filter((list)=>{
         return list.deletionDate == null;
