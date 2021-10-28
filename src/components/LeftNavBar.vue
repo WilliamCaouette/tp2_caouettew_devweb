@@ -69,7 +69,7 @@ export default {
         margin-top: 5%;
     }
     .middle{
-        margin-top:15vh;
+        margin-top:5vh;
     }
     .bottom{
         margin-top:5vh;
