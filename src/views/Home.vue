@@ -179,6 +179,56 @@ export default {
             }
           ]
         },
+        {
+          id:3,
+          name: "repas",
+          description : "exemple d'utilisation de l'application",
+          deletionDate : null,
+          creationDate : "2021-10-25",
+          img: "img/purchase.png",
+          elements:[
+            {
+              id:0,
+              title: "mac&cheese",
+              isCompleted: false
+            },
+            {
+              id:1,
+              title: "Soupe au poulet",
+              isCompleted: false
+            },
+            {
+              id:2,
+              title: "Steak Frite",
+              isCompleted: false
+            }
+          ]
+        },
+        {
+          id:4,
+          name: "Devoirs à rendre",
+          description : "exemple d'utilisation de l'application",
+          deletionDate : null,
+          creationDate : "2021-10-25",
+          img: "img/task.png",
+          elements:[
+            {
+              id:0,
+              title: "Animation pour Éric",
+              isCompleted: false
+            },
+            {
+              id:1,
+              title: "Site Web pour Stephane",
+              isCompleted: false
+            },
+            {
+              id:2,
+              title: "Sons pour Marc",
+              isCompleted: false
+            }
+          ]
+        },
       ]
 
     }
