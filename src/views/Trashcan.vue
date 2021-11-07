@@ -49,9 +49,19 @@ export default {
      * @description Supprime les listes qui sont dans la corbeille en enregistrant la liste filtrer
      */
       deleteHiddenLists(){
-        let stringnifyLists = JSON.stringify(this.nonDeletedLists);
+        let stringnifyLists = JSON.stringify(this.resetListId(this.nonDeletedLists));
         localStorage.setItem("savedList", stringnifyLists);
         this.refreshLists();
+      },
+    /**
+     * @author William Caouette
+     * @description Réajuste les Id des listes selon leur position dans la liste de liste
+     */
+      resetListId(lists){
+        lists.forEach((list,id) => {
+          list.id = id;
+        });
+        return lists;
       },
 
     /**
